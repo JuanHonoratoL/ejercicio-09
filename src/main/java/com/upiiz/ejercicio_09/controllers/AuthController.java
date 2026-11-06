@@ -33,11 +33,11 @@ public class AuthController {
         // Verificar que no exista otro nombre de usuario igual
         if (userService.getUserByUsername(user.getUsername()).isPresent()) {
             return ResponseEntity.status(409).body(
-                    Map.of("estado", 0,
+                    Map.of("estado", 409,
                             "mensaje", "El usuario ya existe"));
         } else { // Verificar que sí se pudo registrar el usuario
             return ResponseEntity.status(201).body(
-                    Map.of("estado", 1,
+                    Map.of("estado", 201,
                             "mensaje", "Usuario registrado",
                             "usuario", userService.savUser(user)));
         }
@@ -49,11 +49,11 @@ public class AuthController {
         User usuario = userService.getUserByUsername(user.getUsername()).orElse(null);
         if (usuario == null) {
             return ResponseEntity.status(400).body(
-                    Map.of("estado:", 0,
+                    Map.of("estado:", 400,
                             "mensaje", "Usuario no encontrado"));
         } else {
             return ResponseEntity.status(200).body(
-                    Map.of("estado", 1,
+                    Map.of("estado", 200,
                             "mensaje", "Usuario logueado",
                             "token", jwtService.generateJwtToken(usuario.getUsername())));
         }
