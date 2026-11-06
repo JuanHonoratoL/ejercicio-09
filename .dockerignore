@@ -1,0 +1,10 @@
+target/
+.git/
+.vscode/
+.idea/
+*.iml
+HELP.md
+
+# Nunca incluir credenciales locales en la imagen
+src/main/resources/application-local.properties
+
